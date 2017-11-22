@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>论坛发布</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/post.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+    <script src="/static/js/jquery-3.2.1.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/post.js"></script>
+    <script src="/static/js/index.js"></script>
+</head>
+<body>
+<div class="container px-0">
+<nav class="navbar navbar-expand-md  navbar-light my-4 p-0 bkg-white-color">
+    <!-- Brand -->
+    <a class="navbar-brand pl-3" href="{{mainpage_url}}"><img src="/static/img/unfunlistLogo2.gif" alt="logo image" style="width:130px;"></a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse text-uppercase justify-content-end" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{mainpage_url}}">主页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{login_url}}">我的帐户</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle p-4" href="#" id="navbardrop" data-toggle="dropdown">
+                  {{university_name}}
+              </a>
+              <div class="dropdown-menu border-0 rounded-0 bkg-white-color">
+                {% for name in university_list %}
+                <a class="dropdown-item py-3" href="javascript:void(0)" onclick='switch_university("/mainpage/{{name}}/")'>{{name}}</a>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{about_url}}">关于我们</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>
+<main class="container my-3">
+    <section class="row justify-content-center">
+        <div class="col-md-8 m-2 p-0 ">
+            <div class="col-4 d-flex align-items-center mb-2 p-0" style="min-width: 400px">
+                <select name="topCategory" class="form-control rounded-0 bkg-white-color" id="topCategory">
+                    <option value=0>论坛</option>
+                    <option value=1>通知</option>
+                    <option value=2>购物</option>
+                    <option value=3>交友</option>
+                    <option value=4>失物招领</option>
+                    <option value=5>工作</option>
+                </select>
+                <h4 class="mx-2 my-0">&gt;</h4>
+                <select name="subCategory" class="form-control rounded-0 bkg-white-color" id="subCategory">
+                    <option value=0>本科生</option>
+                    <option value=1>研究生</option>
+                    <option value=2>博士生</option>
+                </select>
+            </div>
+            <form action="#" method="post">
+                    <div class="row m-0 mb-2">
+                        <div class="col-sm-9 d-flex p-0 my-1" id="titleCol">
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-sm rounded-0 bkg-white-color">标题</span>
+                                <input type="text" required name="title" id="title" class="form-control rounded-0" maxlength="50" placeholder="不超过50字">
+                            </div>
+                            <!--<label for="title" class="bg-secondary px-3 py-1 m-0 text-center text-nowrap">标题</label>
+                            <input type="text" name="title" id="title" class="form-control rounded-0 p-1 border-0" maxlength="50">-->
+                        </div>
+                    </div>
+
+                    <div class="row m-0">
+                        <textarea name="content" required id="postcontent"  rows="20" class="form-control rounded-0 border-0 m-0" placeholder="点击此处输入内容"></textarea>
+                    </div>
+                    <div class="row m-0 mt-3">
+                        <div class="d-flex align-items-center col-sm m-0 p-0 mb-2">
+                        </div>
+                        <div class="d-flex align-items-center col-sm-6 m-0 p-0 mb-2 justify-content-end">
+                            <input type="submit" class="form-control btn btn-primary ml-2 w-50 rounded-0" value="提交">
+                        </div>
+                    </div>
+            </form>
+
+        </div>
+    </section>
+</main>
+<footer class="container bkg-dark-color p-2 mt-4">
+    <div class="row ">
+        <div class="col-sm-12 text-center">Copyright &copy; 2017 Jilin University </div>
+    </div>
+</footer>
+</body>
+</html>

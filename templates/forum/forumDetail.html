@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>帖子详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+    <script src="/static/js/jquery-3.2.1.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/forumDetail.js"></script>
+</head>
+<body>
+<div class="container px-0">
+<nav class="navbar navbar-expand-md  navbar-light my-4 p-0 bkg-white-color">
+    <!-- Brand -->
+    <a class="navbar-brand pl-3" href="{{mainpage_url}}"><img src="/static/img/unfunlistLogo2.gif" alt="logo image" style="width:130px;"></a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse text-uppercase justify-content-end" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{mainpage_url}}">主页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-4" id="userName" href="{{user_url}}">{{user_name}}</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle p-4" href="#" id="navbardrop" data-toggle="dropdown">
+                  {{university_name}}
+              </a>
+              <div class="dropdown-menu border-0 rounded-0 bkg-white-color">
+                {% for name in university_list %}
+                <a class="dropdown-item py-3" href="/mainpage/{{name}}/">
+                    {{name}}
+                </a>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{about_url}}">关于我们</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>
+<div class="modal fade" id="loginModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">提示</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+          未登录用户无权进行本操作，请点击 “我的帐户” 进行登录。
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 p-0 mx-4">
+            <div class="row mb-3">
+                <div class="col-12 d-flex align-items-center p-0 m-0">
+                    <a href="{{top_category.url}}" class="btn bkg-white-color rounded-0">{{top_category.name}}</a>
+                    <h4 class="mx-3 my-0">&gt;</h4>
+                    <a href="{{sub_category.url}}" class="btn bkg-white-color rounded-0">{{sub_category.name}}</a>
+                    <a href="/forum/post/{{university_name}}/" class="btn btn-primary  ml-auto" id="addNewBtn"><i class="fa fa-plus mr-1"></i>发表新帖</a>
+                </div>
+            </div>
+            <div class="row bkg-white-color border-bottom" style="border-color: rgba(0,0,0,0.3);">
+                <h5 class="m-3 font-weight-normal break-word">
+                    {{host_title | linebreaksbr}}
+                </h5>
+            </div>
+            <!-- Author -->
+            <div class="row mb-3 ">
+                <div class="col-2 bkg-profile-color p-0">
+                    <div class=" no-background rounded-0 d-flex flex-column align-items-center">
+                        <img class="img-fluid mb-3" src="/static/img/img_avatar{{host_gender}}.png" alt="profile avatar">
+                        <h6 class="mb-2 break-word">{{host_username}}</h6>
+                        <h6 class="mb-3 text-success">楼主</h6>
+                    </div>
+                </div>
+                <div class="col-10 bkg-white-color rounded-0 border-0 d-flex flex-column py-2">
+                    <p class="mx-2 mt-2 break-word">{{host_content | linebreaksbr}}</p>
+                    <div class="d-flex mt-auto justify-content-end align-items-center">
+                        <p class="font-small p-0 m-0 mr-2 text-secondary">1楼</p>
+                        <p class="font-small p-0 m-0 mr-2 text-secondary" hidden id="hostThreadId">{{host_id}}</p>
+                        <p class="font-small p-0 m-0 mr-2 text-secondary">{{host_time|date:"Y-m-d H:i"}}</p>
+                        <button class="btn no-background rounded-0 font-small p-0 px-1 text-primary replyHostBtn" style="height: 25px;">回复</button>
+                    </div>
+
+                </div>
+            </div>
+            <!-- List -->
+            {% for floor in floors %}
+            <div class="row mb-3 ">
+                <div class="col-2 bkg-profile-color p-0">
+                    <div class=" no-background rounded-0 d-flex flex-column align-items-center">
+                        <img class="img-fluid mb-3" src="/static/img/img_avatar{{floor.gender}}.png" alt="profile avatar">
+                        <h6 class="card-title mb-4 break-word">{{floor.username}}</h6>
+                    </div>
+                </div>
+                <div class="col-10 bkg-white-color rounded-0 border-0 d-flex flex-column py-2">
+                    <p class="mb-auto mx-2 mt-2 break-word">{{floor.content | linebreaksbr}}</p>
+
+                    <div class="d-flex justify-content-end align-items-center">
+                        <p class="font-small p-0 m-0 mr-2 text-secondary threadId " hidden>{{floor.id}}</p>
+                        <p class="font-small p-0 m-0 mr-2 text-secondary">{{floor.no}}楼</p>
+                        <p class="font-small p-0 m-0 mr-2 text-secondary">{{floor.time|date:"Y-m-d H:i"}}</p>
+                        <button class="btn no-background rounded-0 font-small replyBtn p-0 px-1 text-primary"
+                                style="height: 25px;">回复</button>
+                    </div>
+                    <div class="collapse bkg-dark-color px-1  replyWholeCollapse">
+                        <div class="d-flex flex-column replyColumn">
+                            <!--A empty reply row is important -->
+                            <div class="replyRow m-0" hidden></div>
+                            {% for second in floor.list %}
+                            <div class="d-flex flex-column border-bottom replyRow mt-1">
+                                <div class="d-flex flex-row align-items-top">
+                                    <p class="text-info m-0 mx-1 replyName">{{second.username}}:</p>
+                                    <p class="m-0 break-word break-word">{{second.content | linebreaksbr}}</p>
+                                </div>
+                                <div class="d-flex flex-row justify-content-end align-items-center">
+                                    <p class="font-small p-0 m-0 mr-2 text-secondary threadId " hidden>{{second.id}}</p>
+                                    <p class="font-small p-0 m-0 mr-2 text-secondary">{{second.time|date:"Y-m-d H:i"}}</p>
+                                    <button class="btn no-background rounded-0 font-small p-0 text-secondary smallReply">回复</button>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="d-flex align-items-center justify-content-end mb-2 mt-2">
+                                <button class="btn p-0 px-1  font-small btn-info letMeSay">我来说一句</button>
+                            </div>
+                            <div class="collapse">
+                                <div class="d-flex align-items-center m-1">
+                                    <textarea type="text" rows="1" required class="form-control mr-1 p-0  py-1 font-small" name="replyContent"></textarea>
+                                    <button class="btn btn-primary form-control font-small p-0 py-1 replyInputBtn"
+                                            style="max-width: 70px;">回复</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row mb-3">
+                <div class="col-12 d-flex flex-column p-0">
+                    <form action="/forum/replytohost/" method="get" id="replyToHostForm">
+                        <textarea name="content" required id="replyContent"  rows="6"
+                                  class="form-control rounded-0 border-0 m-0" placeholder="回复楼主"></textarea>
+                        <div class="d-flex flex-row justify-content-end py-2">
+                            <button class="form-control btn btn-primary col-2 p-1" id="replyToHostBtn" >回复</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="container bkg-dark-color p-2">
+    <div class="row ">
+        <div class="col-sm-12 text-center">Copyright &copy; 2017 Jilin University </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Ufunlist</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+    <script src="/static/js/jquery-3.2.1.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/index.js"></script>
+</head>
+<body>
+<div class="container px-0">
+<nav class="navbar navbar-expand-md  navbar-light my-4 p-0 bkg-white-color">
+    <!-- Brand -->
+    <a class="navbar-brand pl-3" href="{{mainpage_url}}"><img src="/static/img/unfunlistLogo2.gif" alt="logo image" style="width:130px;"></a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse text-uppercase justify-content-end" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{mainpage_url}}">主页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{user_url}}">{{user_name}}</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle p-4" href="#" id="navbardrop" data-toggle="dropdown">
+                  {{university_name}}
+              </a>
+              <div class="dropdown-menu border-0 rounded-0 bkg-white-color">
+                {% for u in university_list %}
+                <a class="dropdown-item py-3" href="/mainpage/{{u}}/">{{u}}</a>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{about_url}}">关于我们</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>
+<main class="container px-5">
+    <section class="row">
+        <section class="col-sm-2 bkg-dark-color m-2 p-0">
+            <button class="btn btn-block rounded-0 bkg-white-color text-black" data-toggle="collapse" data-target="#search_box">
+                <i class="fa fa-search  mr-2" aria-hidden="true"></i>
+                搜索
+            </button>
+            <div id="search_box" class="collapse">
+                <!--search form-->
+                <form class="form-inline" id="searchForm" action="#" method="get">
+                    <input class="form-control w-100 rounded-0 border-top" type="search" id="searchInput" placeholder="关键字">
+                    <button class="btn btn-secondary btn-block rounded-0" type="submit" id="searchBtn">搜索</button>
+                </form>
+            </div>
+            <div class="modal fade" id="searchModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title">提示</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            请输入搜索关键字
+                        </div>
+                        <!-- Modal footer
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <a class="btn bkg-white-color btn-block rounded-0 mt-2 text-black" href="post.html">
+                <i class="fa fa-plus  mr-2" aria-hidden="true"></i>
+                发布
+            </a>
+        </section>
+        <section class="col-sm">
+            {% for tmp in sections %}
+            <div class="row">
+                {% for section in tmp %}
+                <div class="col-sm bkg-white-color py-4 m-2">
+                    <div class="card border-0 no-background">
+                        <div class="card-title text-center">
+                            <!-- <a class="btn rounded-0" href="{{section.target}}"> -->
+                                <h5>
+                                    <i class="fa fa-bullhorn category-logo align-middle mr-3" aria-hidden="true"></i>
+                                    {{section.name}}
+                                </h5>
+                            <!-- </a> -->
+                        </div>
+                        <div class="list-group">
+                            {% for subsection in section.subsections %}
+                            <a href="{{subsection.target}}" class="list-group-item list-group-item-action no-background border-bottom rounded-0">
+                                {{subsection.name}}
+                                {% if subsection.ishot %}
+                                <span class="badge-pill badge-danger float-right font-small">{{subsection.num}}</span>
+                                {% else %}
+                                <span class="badge-pill badge-secondary float-right font-small">{{subsection.num}}</span>
+                                {% endif %}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            </section>
+        </section>
+</main>
+<section class="container px-0 py-3">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <a class="btn rounded-0 font-medium p-1 mx-1" href="#">
+                    <i class="fa fa-info-circle align-middle"></i>
+            </a>
+            <a class="btn rounded-0 font-medium p-1 mx-1" href="#">
+                    <i class="fa fa-google align-middle"></i>
+            </a>
+            <a class="btn rounded-0 font-medium p-1 mx-1" href="#">
+                <i class="fa fa-qq"></i>
+            </a>
+            <a class="btn rounded-0 font-medium p-1 mx-1" href="#">
+                    <i class="fa fa-wechat"></i>
+            </a>
+            <a class="btn rounded-0 font-medium p-1 mx-1" href="#">
+                    <i class="fa fa-facebook"></i>
+            </a>
+        </div>
+    </div>
+</section>
+<footer class="container bkg-dark-color p-2">
+    <div class="row ">
+        <div class="col-sm-12 text-center">Copyright &copy; 2017 Jilin University </div>
+    </div>
+</footer>
+</body>
+</html>

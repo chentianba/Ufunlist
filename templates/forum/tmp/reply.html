@@ -1,0 +1,16 @@
+<html>
+<body>
+    <a href="/mainpage/">Home</a><br/>
+    <h1>{{headpost.username}}----{{headpost.time}}----{{headpost.content}}</h1>
+    <ul>
+        {% for reply in replys %}
+        <ui>{{reply.username}}----{{reply.time}}----{{reply.content}}</ui><br/>
+        {% endfor %}
+    </ul>
+    <br/><br/><br/><br/>
+    <form method="post"> {% csrf_token %}
+        <textarea name='reply'>回复</textarea>
+        <input type="submit">
+    </form>
+</body>
+</html>

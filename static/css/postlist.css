@@ -1,0 +1,32 @@
+.div-inline {
+    display: inline-block;
+}
+.dropdown-menu {
+    min-width:0px;
+}
+/*#postListGroup a:hover {
+    color: royalblue;
+    background: none;
+}*/
+.rounded-corner {
+    border-radius: 20px;
+}
+.page-link {
+    color: black;
+    font-size:14px;
+}
+.custom-control-indicator {
+    background: none;
+    border: 1px solid #e6e6e6;
+}
+.custom-control-input:checked ~ .custom-control-indicator {
+    background:gray;
+}
+.custom-control-input:active ~ .custom-control-indicator {
+    background:gray;
+}
+.custom-control-description {
+    color: #4d4d4d;
+}
+
+

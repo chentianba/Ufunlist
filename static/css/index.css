@@ -1,0 +1,96 @@
+:root {
+    --panel-white-color: rgba(255,255,255,0.8);
+    --panel-dark-color: rgba(0,0,0,0.1);
+}
+@media (min-width: 1400px) {
+    .container{
+        max-width: 1300px;
+    }
+}
+.bkg-white-color {
+    background-color: var(--panel-white-color);
+}
+.bkg-dark-color {
+    background-color: var(--panel-dark-color);
+}
+/*.dropdown-toggle::after {
+    display: none;
+}*/
+body {
+    background: lightgray url(../img/circles-and-roundabouts-2.png) repeat fixed;
+    background-size: auto;
+}
+/*.navbar-nav > li > a:hover{
+    background-color: lightgray;
+}*/
+.no-background {
+    background: none;
+}
+/*.category-title {
+    font-size:20px;
+}*/
+.category-logo {
+    font-size:40px;
+}
+.border-bottom {
+    border: thin none var(--panel-dark-color);
+    border-bottom-style: solid;
+}
+.border-top {
+    border: thin none var(--panel-dark-color);
+    border-top-style: solid;
+}
+.font-small {
+    font-size:14px;
+}
+.font-medium {
+    font-size:18px;
+}
+.navbar-nav .nav-item .nav-link {
+    color: black;
+}
+.navbar-nav .nav-item .nav-link:hover {
+    color: royalblue;
+    background-color: lightgray;
+}
+a {
+    color:black;
+}
+/*a :hover {
+    text-decoration: none;
+}*/
+.text-black {
+    color: black;
+}
+.container .row .col-sm-12 a {
+    background-color: rgba(255,255,255,0.4);
+    /*size: 35px 30px;*/
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+}
+.navbar-nav .dropdown-item:hover {
+    background-color: lightgray;
+    color: royalblue;
+}
+.dropdown-menu {
+    min-width:0px;
+}
+
+/*.btn-round {
+    border-radius: 20px;
+}*/
+.hidden {
+    display: none;
+}
+.bkg-profile-color {
+    background-color: rgba(255,255,255,0.5);
+}
+.border-right {
+    border: thin none var(--panel-dark-color);
+    border-right-style: solid;
+}
+.break-word {
+    word-wrap: break-word;
+    word-break: break-all;
+}

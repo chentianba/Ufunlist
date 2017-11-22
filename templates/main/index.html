@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Ufunlist</title>
+    <link rel="stylesheet" type="text/css" href="../static/color.css">
+</head>
+<body>
+    <h1>You Fun List!</h1>
+    <label>{{ university_name }}</label><br/>
+    <label>{{ user_name }}</label><br/>
+    <a href='/mainpage/'>post</a><br/>
+    <a href='http://www.baidu.com'>about</a><br/>
+    {% for sec in sections %}
+        <h3><a href="{{sec.target}}">{{ sec.name }}</a></h3>
+        <ul>
+            {% for subsec in sec.subsections %}
+                <li><a href="{{subsec.target}}">{{ subsec.name }} ---- <b>{{ subsec.num }} </b></a></li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>

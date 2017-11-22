@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Ufunlist</title>
+</head>
+<body>
+    <a href="/mainpage/">Home</a><br/>
+    <a href="/forum/post/">Post</a><br/>
+    <label>{{ section }} {{ subsection }}</label><br/><br/>
+    {% for post in posts %}
+    <a href="/forum/reply/{{post.related.id}}/">{{post.title}}</a> ---- {{post.time}}---- {{post.childnum}}<br/>
+    {% endfor %}
+    <form action="" method="post"> {% csrf_token %}
+        <input type="submit" name="prev" value="prev">
+        <input type="text" name="position" value="{{cur_pos}}/{{total_pos}}">
+        <input type="submit" name="next" value="next">
+    </form>
+</body>
+</html>

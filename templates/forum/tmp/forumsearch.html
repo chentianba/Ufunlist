@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/postlist.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+    <script src="/static/js/jquery-3.2.1.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/index.js"></script>
+</head>
+<body>
+<div class="container px-0">
+<nav class="navbar navbar-expand-md  navbar-light my-4 p-0 bkg-white-color">
+    <!-- Brand -->
+    <a class="navbar-brand pl-3" href="{{mainpage_url}}"><img src="/static/img/unfunlistLogo2.gif" alt="logo image" style="width:130px;"></a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse text-uppercase justify-content-end" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{mainpage_url}}">主页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{login_url}}">{{user_name}}</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle p-4" href="#" id="navbardrop" data-toggle="dropdown">
+                  {{university_name}}
+              </a>
+              <div class="dropdown-menu border-0 rounded-0 bkg-white-color">
+              	{% for name in university_list %}
+                <a class="dropdown-item py-3" href="javascript:void(0)" onclick='switch_university("/mainpage/{{name}}/")'>{{name}}</a>
+                {% endfor %}
+              </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-4" href="{{about_url}}">关于我们</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>
+<main class="container px-5 mb-4">
+    <section class="row">
+        <section class="col-md-2 bkg-dark-color m-2 p-0">
+            <button class="btn btn-block rounded-0 bkg-white-color text-black" data-toggle="collapse" data-target="#search_box">
+                <i class="fa fa-search  mr-2" aria-hidden="true"></i>
+                搜索
+            </button>
+            <div id="search_box" class="collapse">
+                <!--search form-->
+                <form class="form-inline" id="searchForm" action="#" method="get">
+                    <input class="form-control w-100 rounded-0 border-top" type="search" id="searchInput" placeholder="关键字">
+                    <label class="custom-control custom-checkbox m-2 ">
+                        <input type="checkbox" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description ml-2 font-small">只搜索标题</span>
+                    </label>
+                    <button class="btn btn-secondary btn-block rounded-0" type="submit" id="searchBtn">搜索</button>
+                </form>
+            </div>
+            <div class="modal fade" id="searchModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title">提示</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            请输入搜索关键字
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="btn bkg-white-color btn-block rounded-0 mt-2 text-black" href="{{post_url}}">
+                <i class="fa fa-plus  mr-2" aria-hidden="true"></i>
+                发布
+            </a>
+        </section>
+        <section class="col-md p-0">
+            <section class="card no-background border-0">
+                <div class="card-header m-2 no-background border-0 p-0">
+                    <div class="dropdown div-inline">
+                        <button type="button" class="btn bkg-white-color dropdown-toggle rounded-0" data-toggle="dropdown">
+                            {{section}}
+                        </button>
+                        <div class="dropdown-menu bkg-white-color rounded-0 border-0">
+                            <a class="dropdown-item" href="#">通知</a>
+                            <a class="dropdown-item" href="#">购物</a>
+                            <a class="dropdown-item" href="#">交友</a>
+                        </div>
+                    </div>
+                    <h4 class="div-inline mx-1 my-0 align-middle">&gt;</h4>
+                    <div class="dropdown div-inline">
+                        <button type="button" class="btn bkg-white-color dropdown-toggle rounded-0" data-toggle="dropdown">
+                            {{subsection}}
+                        </button>
+                        <div class="dropdown-menu bkg-white-color rounded-0 border-0">
+                            <a class="dropdown-item" href="#">研究生</a>
+                            <a class="dropdown-item" href="#">博士生</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body mx-2 mt-2 mb-0 p-0 " id="postListGroup">
+                    <div class="list-group bkg-white-color p-3">
+                    	{% for post in posts %}
+                        <a href="/forum/reply/{{post.related.id}}/" class="list-group-item list-group-item-action no-background border-bottom rounded-0 p-2
+                                           d-flex flex-row align-items-center">
+                             {{post.title}}
+                            <span class="badge-pill badge-secondary font-small ml-auto">{{post.childnum}}</span>
+                        </a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="card-footer mx-2 mt-0 mb-2 p-0 pt-2 rounded-0 border-0 bkg-white-color">
+                    <ul class="pagination justify-content-center no-background">
+                    	<form method="post"> {% csrf_token %}
+                    		<input type="submit" name="prev" value="上一页">
+                    		<input type="text" name="position" value="{{cur_pos}}/{{total_pos}}">
+                    		<input type="submit" name="next" value="下一页">
+                    	</form><br/>
+<!--                         <li class="page-item disabled"><a class="page-link bkg-white-color " href="#">&lt; 上一页</a></li>
+                        <li class="page-item"><span id="test" class="page-link bkg-white-color">1 / 100</span></li>
+                        <li class="page-item"><a class="page-link bkg-white-color" href="#12" onclick='(function(){location.href="/forum/search/"+ $("#test").text()})'>下一页 &gt;</a></li> -->
+                    </ul>
+                </div>
+            </section>
+        </section>
+    </section>
+</main>
+<footer class="container bkg-dark-color p-2">
+    <div class="row ">
+        <div class="col-sm-12 text-center">Copyright &copy; 2017 Jilin University </div>
+    </div>
+</footer>
+</body>
+</html>
