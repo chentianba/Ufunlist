@@ -29,7 +29,8 @@ DEBUG = True
 # ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ['10.151.169.95']
 #ALLOWED_HOSTS = ['49.140.122.18']
-ALLOWED_HOSTS = ['108.61.86.197', 'www.ufunlist.tk', 'ufunlist.tk', '49.140.122.18', '10.151.166.109']
+# ALLOWED_HOSTS = ['108.61.86.197', 'www.ufunlist.tk', 'ufunlist.tk', '49.140.122.18', '10.151.166.109']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
