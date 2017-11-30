@@ -158,6 +158,24 @@ public_userwechat | CREATE TABLE `public_userwechat` (
   CONSTRAINT `public_userwechat_userid_id_d4bdce70_fk_auth_user_id` FOREIGN KEY (`userid_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 
+account_passwordverify | CREATE TABLE `account_passwordverify` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(254) NOT NULL,
+  `code` varchar(6) NOT NULL,
+  `deadline` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8
+
+account_regverify | CREATE TABLE `account_regverify` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(254) NOT NULL,
+  `code` varchar(6) NOT NULL,
+  `deadline` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
+
 开发环境：
 1. windows10操作系统
 2. mysql 5.7(community)
